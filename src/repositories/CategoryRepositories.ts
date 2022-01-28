@@ -18,4 +18,8 @@ export class CategoriesRepository {
         createdAt: new Date().toDateString()
       }))
     }
+
+    list (): Category[] {
+      return this.categories
+    }
 }
