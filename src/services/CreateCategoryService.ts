@@ -1,4 +1,4 @@
-import { CategoriesRepository } from '../repositories/CategoryRepositories'
+import { ICategoryRepository } from '../repositories/ICategoryRepository'
 
 type IRequest = {
     name: string,
@@ -6,9 +6,9 @@ type IRequest = {
 }
 
 class CreateCategoryService {
-    private categoriesRepository:CategoriesRepository;
+    private categoriesRepository:ICategoryRepository;
 
-    constructor (categoriesRepository: CategoriesRepository) {
+    constructor (categoriesRepository: ICategoryRepository) {
       this.categoriesRepository = categoriesRepository
     }
 
