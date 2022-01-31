@@ -19,6 +19,10 @@ export class CategoriesRepository {
       }))
     }
 
+    existsByName (name: string): boolean {
+      return this.categories.some(c => c.name === name)
+    }
+
     list (): Category[] {
       return this.categories
     }
