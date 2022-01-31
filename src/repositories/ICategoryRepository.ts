@@ -1,6 +1,6 @@
 import { Category } from '../model/Category'
 
-interface ICreateCategoryDTO {
+export interface ICreateCategoryDTO {
     name: string,
     description: string
 }
