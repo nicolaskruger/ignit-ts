@@ -8,16 +8,6 @@ app.use(express.json())
 
 app.use('/categories', categoriesRoutes)
 
-app.use('/specificatiom', specficationRoutes)
-
-// app.get('/', createCourse)
-
-// app.post('/courses', (req:Request<{}, {}, {name: string}>, res) => {
-//   const { name } = req.body
-
-//   return res.json({
-//     name
-//   })
-// })
+app.use('/specification', specficationRoutes)
 
 app.listen(3333, () => console.log('server is runig'))

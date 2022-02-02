@@ -1,4 +1,3 @@
-import { Specification } from '../model/Specification'
 import { ISpecificationRepository } from '../repositories/ISpecificationRepository'
 
 type IRequest = {
@@ -7,14 +6,12 @@ type IRequest = {
 }
 
 export class CreateSpecificationService {
-    private specificationRepository:ISpecificationRepository;
+  constructor (private specificationRepository: ISpecificationRepository) {
+    this.specificationRepository = specificationRepository
+  }
 
-    constructor (specificationRepository: ISpecificationRepository) {
-      this.specificationRepository = specificationRepository
-    }
-
-    execute ({ name, description }:IRequest) {
-      this.specificationRepository
-        .create(new Specification({ name, description, createdAt: new Date().toDateString() }))
-    }
+  execute ({ name, description }:IRequest) {
+    this.specificationRepository
+      .create({ name, description })
+  }
 }
