@@ -4,8 +4,17 @@ import { ICreateSpecificationDTO, ISpecificationRepository } from '../ISpecifica
 export class SpecificationRepository implements ISpecificationRepository {
     private specificationList: Specification[];
 
-    constructor () {
+    private static INSTACE:ISpecificationRepository;
+
+    private constructor () {
       this.specificationList = []
+    }
+
+    static getInstance () {
+      if (!this.INSTACE) {
+        this.INSTACE = new SpecificationRepository()
+      }
+      return this.INSTACE
     }
 
     findByName (name: string): Specification {

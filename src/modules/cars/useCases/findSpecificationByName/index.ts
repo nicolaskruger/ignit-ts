@@ -2,7 +2,7 @@ import { SpecificationRepository } from '../../repositories/implementations/Spec
 import { FindSpecificationByNameController } from './FindSpecificationByNameController'
 import { FindSpecificationByNameUseCase } from './FindSpecificationByNameUseCase'
 
-const specificationRepository = new SpecificationRepository()
+const specificationRepository = SpecificationRepository.getInstance()
 
 const findSpecificationUseCase = new FindSpecificationByNameUseCase(specificationRepository)
 

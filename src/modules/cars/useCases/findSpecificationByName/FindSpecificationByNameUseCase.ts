@@ -1,7 +1,7 @@
-import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
+import { ISpecificationRepository } from '../../repositories/ISpecificationRepository'
 
 export class FindSpecificationByNameUseCase {
-  constructor (private specificationRepository:SpecificationRepository) {
+  constructor (private specificationRepository:ISpecificationRepository) {
     this.specificationRepository = specificationRepository
   }
 
