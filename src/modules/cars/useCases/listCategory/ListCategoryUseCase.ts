@@ -1,10 +1,10 @@
 import { Category } from '../../model/Category'
-import { CategoriesRepository } from '../../repositories/CategoryRepositories'
+import { ICategoryRepository } from '../../repositories/ICategoryRepository'
 
 export class ListCategoryUseCase {
-    private categoryRepository:CategoriesRepository;
+    private categoryRepository:ICategoryRepository;
 
-    constructor (categoryRepository:CategoriesRepository) {
+    constructor (categoryRepository: ICategoryRepository) {
       this.categoryRepository = categoryRepository
     }
 

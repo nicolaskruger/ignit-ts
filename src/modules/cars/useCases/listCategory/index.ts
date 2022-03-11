@@ -1,6 +1,7 @@
-import { categoriesRepository } from '../createCategory'
+import { CategoriesRepository } from '../../repositories/CategoryRepositories'
 import { ListCategoryController } from './ListCategoryController'
 import { ListCategoryUseCase } from './ListCategoryUseCase'
 
-const listCategoryUseCase = new ListCategoryUseCase(categoriesRepository)
+const categoryRepository = CategoriesRepository.getInstance()
+const listCategoryUseCase = new ListCategoryUseCase(categoryRepository)
 export const listCategoryController = new ListCategoryController(listCategoryUseCase)
