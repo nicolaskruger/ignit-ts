@@ -1,4 +1,4 @@
-import { SpecificationRepository } from '../../repositories/SpecificationRepository'
+import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
 
 export class FindSpecificationByNameUseCase {
   constructor (private specificationRepository:SpecificationRepository) {

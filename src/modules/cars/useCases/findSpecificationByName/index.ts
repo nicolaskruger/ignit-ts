@@ -1,4 +1,4 @@
-import { SpecificationRepository } from '../../repositories/SpecificationRepository'
+import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
 import { FindSpecificationByNameController } from './FindSpecificationByNameController'
 import { FindSpecificationByNameUseCase } from './FindSpecificationByNameUseCase'
 
