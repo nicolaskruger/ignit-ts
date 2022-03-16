@@ -32,8 +32,10 @@ export class ImportCategoryUseCase {
             description
           })
         }).on('end', () => {
+          fs.promises.unlink(file.path)
           resolve(categories)
         }).on('error', (err) => {
+          fs.promises.unlink(file.path)
           reject(err)
         })
       })
