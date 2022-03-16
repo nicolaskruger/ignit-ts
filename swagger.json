@@ -43,6 +43,34 @@
                         "description": "category already exists"
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "sumary": "List categories",
+                "description": "List all categories",
+                "responses": {
+                    "200": {
+                        "description": "List",
+                        "content": {
+                            "schema":{
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
