@@ -8,7 +8,7 @@ export class ListCategoryUseCase {
       this.categoryRepository = categoryRepository
     }
 
-    execute ():Category[] {
+    execute ():Promise<Category[]> {
       return this.categoryRepository.list()
     }
 }

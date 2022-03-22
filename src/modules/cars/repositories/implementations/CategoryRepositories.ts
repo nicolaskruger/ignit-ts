@@ -1,3 +1,5 @@
+import { Repository } from 'typeorm'
+import { dataSource } from '../../../../database'
 import { Category } from '../../entities/Category'
 import { ICategoryRepository } from '../ICategoryRepository'
 
@@ -7,9 +9,9 @@ interface ICreateCategoryDTO {
 }
 
 export class CategoriesRepository implements ICategoryRepository {
-    private categories: Category[];
-
     private static INSTANCE:CategoriesRepository;
+
+    private repository: Repository<Category>;
 
     public static getInstance ():CategoriesRepository {
       if (!this.INSTANCE) {
@@ -19,22 +21,26 @@ export class CategoriesRepository implements ICategoryRepository {
     }
 
     private constructor () {
-      this.categories = []
+      this.repository = dataSource.getRepository(Category)
     }
 
-    create ({ name, description }: ICreateCategoryDTO) {
-      this.categories.push(new Category({
-        name,
-        description,
-        createdAt: new Date().toDateString()
-      }))
+    async create ({ name, description }: ICreateCategoryDTO) {
+      const category = this.repository.create(
+        new Category({
+          name,
+          description,
+          createdAt: new Date().toDateString()
+        })
+      )
+      await this.repository.save(category)
     }
 
-    existsByName (name: string): boolean {
-      return this.categories.some(c => c.name === name)
+    async existsByName (name: string): Promise<boolean> {
+      const category = await this.repository.findOneBy({ name })
+      return category !== null
     }
 
-    list (): Category[] {
-      return this.categories
+    async list (): Promise<Category[]> {
+      return this.repository.find()
     }
 }

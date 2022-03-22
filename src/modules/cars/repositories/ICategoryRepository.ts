@@ -5,7 +5,7 @@ export interface ICreateCategoryDTO {
     description: string
 }
 export interface ICategoryRepository {
-    create({ name, description }: ICreateCategoryDTO):void,
-    existsByName(name: string):boolean,
-    list():Category[]
+    create({ name, description }: ICreateCategoryDTO):Promise<void>,
+    existsByName(name: string):Promise<boolean>,
+    list():Promise<Category[]>
 }

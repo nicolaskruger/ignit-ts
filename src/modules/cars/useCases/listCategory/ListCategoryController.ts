@@ -8,9 +8,10 @@ export class ListCategoryController {
     this.listCategoryUseCase = listCategoryUseCase
   }
 
-  handle (req:Request<{}, {}, {}>, res:Response):Response {
+  async handle (req:Request<{}, {}, {}>, res:Response):Promise<Response> {
     try {
-      return res.status(200).json(this.listCategoryUseCase.execute())
+      const categories = await this.listCategoryUseCase.execute()
+      return res.status(200).json(categories)
     } catch (error) {
       return res.status(400).json(
         {
