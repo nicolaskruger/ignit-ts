@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CategoriesRequest } from '../../model/Category'
+import { CategoriesRequest } from '../../entities/Category'
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
 export class CreateCategoryController {
