@@ -40,6 +40,7 @@ sudo docker-compose down
 # create
 npx typeorm migration:create -n <name>
 # run
-npx typeorm migration:run -n <datasource.tsx>
-
+npx ts-node ./node_modules/.bin/typeorm migration:run -d <datasource.ts>
+# revert
+npx ts-node ./node_modules/.bin/typeorm migration:revert -d <datasource.ts>
 ```
