@@ -6,7 +6,11 @@ export const dataSource = new DataSource({
   password: 'ignite',
   database: 'rentx',
   host: 'localhost',
-  port: 5432
+  port: 5432,
+  migrations: ['./src/database/migrations/*.ts'],
+  cli: {
+    migrationsDir: './src/database/migrations'
+  }
 })
 
 dataSource.initialize()

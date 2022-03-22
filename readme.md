@@ -33,3 +33,13 @@ sudo docker-compose stop
 # remover comtainer
 sudo docker-compose down
 ```
+
+## typeorm
+
+```bash
+# create
+npx typeorm migration:create -n <name>
+# run
+npx typeorm migration:run -n <datasource.tsx>
+
+```
