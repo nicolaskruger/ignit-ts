@@ -1,11 +1,13 @@
 import { Request, Response } from 'express'
+import { inject, injectable } from 'tsyringe'
 import { CategoriesRequest } from '../../entities/Category'
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
+@injectable()
 export class CreateCategoryController {
     createCategoryUseCase:CreateCategoryUseCase;
 
-    constructor (createCategoryUseCase:CreateCategoryUseCase) {
+    constructor (@inject(CreateCategoryUseCase) createCategoryUseCase:CreateCategoryUseCase) {
       this.createCategoryUseCase = createCategoryUseCase
     }
 
