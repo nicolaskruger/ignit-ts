@@ -3,14 +3,12 @@ import { v4 } from 'uuid'
 import { dataSource } from '../../../../database'
 import { Category } from '../../entities/Category'
 import { ICategoryRepository } from '../ICategoryRepository'
-import { inject, singleton } from 'tsyringe'
 
 interface ICreateCategoryDTO {
     name: string,
     description: string
 }
 
-@singleton()
 export class CategoriesRepository implements ICategoryRepository {
     private static INSTANCE:CategoriesRepository;
 
@@ -23,7 +21,7 @@ export class CategoriesRepository implements ICategoryRepository {
       return this.INSTANCE
     }
 
-    constructor (@inject(DataSource) dataSource: DataSource) {
+    constructor (dataSource: DataSource) {
       this.repository = dataSource.getRepository(Category)
     }
 
