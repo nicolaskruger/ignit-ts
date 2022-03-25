@@ -1,8 +1,7 @@
 import { Request, Router } from 'express'
 import multer from 'multer'
-import { container } from 'tsyringe'
+import createCategoryControler from '../modules/cars/useCases/createCategory'
 import { CategoriesRequest } from '../modules/cars/entities/Category'
-import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController'
 import { importCategoryController } from '../modules/cars/useCases/importCategory'
 import { listCategoryController } from '../modules/cars/useCases/listCategory'
 export const categoriesRoutes = Router()
@@ -12,7 +11,7 @@ const upload = multer({
 })
 
 categoriesRoutes.post('/', async (req: Request<{}, {}, CategoriesRequest>, res) => {
-  return await container.resolve(CreateCategoryController).handle(req, res)
+  return await createCategoryControler().handle(req, res)
 })
 
 categoriesRoutes.get('/', async (req, res) => {
