@@ -1,5 +1,9 @@
 # node
 
+## npm
+
+utilizar `npm v 14.17.0`
+
 ## docker
 
 ```bash
@@ -43,4 +47,12 @@ npx typeorm migration:create -n <name>
 npx ts-node ./node_modules/.bin/typeorm migration:run -d <datasource.ts>
 # revert
 npx ts-node ./node_modules/.bin/typeorm migration:revert -d <datasource.ts>
+```
+
+## local postgress
+
+```bash
+# stop
+systemctl stop postgresql
+
 ```
