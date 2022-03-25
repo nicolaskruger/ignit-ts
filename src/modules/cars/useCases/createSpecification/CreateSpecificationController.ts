@@ -13,11 +13,11 @@ export class CreateSpecificationController {
       this.createSpecificationUseCase = createSpecificationUseCase
     }
 
-    handle (req:Request<{}, {}, SpecificationRequest>, res: Response):Response {
+    async handle (req:Request<{}, {}, SpecificationRequest>, res: Response):Promise<Response> {
       const { name, description } = req.body
 
       try {
-        this.createSpecificationUseCase.execute({
+        await this.createSpecificationUseCase.execute({
           name,
           description
         })

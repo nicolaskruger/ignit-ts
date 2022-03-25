@@ -10,8 +10,8 @@ export class CreateSpecificationUseCase {
     this.specificationRepository = specificationRepository
   }
 
-  execute ({ name, description }:IRequest) {
-    this.specificationRepository
+  async execute ({ name, description }:IRequest) {
+    await this.specificationRepository
       .create({ name, description })
   }
 }

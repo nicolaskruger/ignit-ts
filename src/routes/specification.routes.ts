@@ -9,10 +9,10 @@ type SpecificationRequest = {
 
 export const specficationRoutes = Router()
 
-specficationRoutes.get('/by_name/:name', (req: Request<{name: string}, {}, {}>, res) => {
-  return findSpecificationController.handle(req, res)
+specficationRoutes.get('/by_name/:name', async (req: Request<{name: string}, {}, {}>, res) => {
+  return await findSpecificationController().handle(req, res)
 })
 
-specficationRoutes.post('/', (req: Request<{}, {}, SpecificationRequest>, res) => {
-  return createSpecificationController.handle(req, res)
+specficationRoutes.post('/', async (req: Request<{}, {}, SpecificationRequest>, res) => {
+  return await createSpecificationController().handle(req, res)
 })
