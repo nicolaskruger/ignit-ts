@@ -65,6 +65,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "exception already exists"
           }
         }
       }

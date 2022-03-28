@@ -62,8 +62,11 @@ categoriesRoutes.get('/', async (req, res) => {
               }
             }
         }
-            }
-}
+      }
+    }
+    #swagger.responses[500] = {
+        description: "exception already exists",
+    }
   */
   return await listCategoriesController().handle(req, res)
 })
@@ -73,10 +76,9 @@ categoriesRoutes.post('/import', upload.single('file'), async (req, res) => {
         #swagger.requestBody = {
               required: true,
               content: {
-                  "multipart/form-data": {
-                      file: {
+                  "application;octet-stream": {
+                      "schema": {
                         "type": "string",
-                        "format": "binary"
                        },
                   }
               }

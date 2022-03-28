@@ -13,6 +13,6 @@ export class ImportCategoryController {
     async handle (req: Request<any, any, any, any, Record<string, any>>, res: Response):Promise<Response> {
       const { file } = req
       await this.importCategoryUseCase.execute(file as Express.Multer.File)
-      return res.send()
+      return res.status(201).send()
     }
 }
