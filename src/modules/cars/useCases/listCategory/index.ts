@@ -1,7 +1,6 @@
-import { CategoriesRepository } from '../../repositories/implementations/CategoryRepositories'
+import { container } from 'tsyringe'
 import { ListCategoryController } from './ListCategoryController'
-import { ListCategoryUseCase } from './ListCategoryUseCase'
 
-const categoryRepository = CategoriesRepository.getInstance()
-const listCategoryUseCase = new ListCategoryUseCase(categoryRepository)
-export const listCategoryController = new ListCategoryController(listCategoryUseCase)
+export const listCategoriesController = () => {
+  return container.resolve(ListCategoryController)
+}

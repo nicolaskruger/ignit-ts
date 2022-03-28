@@ -1,14 +1,4 @@
-import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
+import { container } from 'tsyringe'
 import { FindSpecificationByNameController } from './FindSpecificationByNameController'
-import { FindSpecificationByNameUseCase } from './FindSpecificationByNameUseCase'
 
-const specificationRepository = SpecificationRepository.getInstance()
-
-const findSpecificationUseCase = new FindSpecificationByNameUseCase(specificationRepository)
-
-const findSpecificationController = new FindSpecificationByNameController(findSpecificationUseCase)
-
-export {
-  findSpecificationController,
-  specificationRepository
-}
+export const findSpecificationController = () => container.resolve(FindSpecificationByNameController)

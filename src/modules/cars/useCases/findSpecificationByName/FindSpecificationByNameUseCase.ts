@@ -5,7 +5,7 @@ export class FindSpecificationByNameUseCase {
     this.specificationRepository = specificationRepository
   }
 
-  execute (name:string) {
-    return this.specificationRepository.findByName(name)
+  async execute (name:string) {
+    return await this.specificationRepository.findByName(name)
   }
 }

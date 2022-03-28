@@ -1,6 +1,8 @@
+import { injectable } from 'tsyringe'
 import { Category } from '../../entities/Category'
 import { ICategoryRepository } from '../../repositories/ICategoryRepository'
 
+@injectable()
 export class ListCategoryUseCase {
     private categoryRepository:ICategoryRepository;
 
@@ -8,7 +10,7 @@ export class ListCategoryUseCase {
       this.categoryRepository = categoryRepository
     }
 
-    execute ():Promise<Category[]> {
-      return this.categoryRepository.list()
+    async execute ():Promise<Category[]> {
+      return await this.categoryRepository.list()
     }
 }

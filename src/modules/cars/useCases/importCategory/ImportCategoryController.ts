@@ -1,5 +1,8 @@
 import { Request, Response, Express } from 'express'
+import { injectable } from 'tsyringe'
 import { ImportCategoryUseCase } from './ImportCategoryUseCase'
+
+@injectable()
 export class ImportCategoryController {
     private importCategoryUseCase: ImportCategoryUseCase;
 
@@ -7,9 +10,9 @@ export class ImportCategoryController {
       this.importCategoryUseCase = importCategoryUseCase
     }
 
-    handle (req: Request<any, any, any, any, Record<string, any>>, res: Response):Response {
+    async handle (req: Request<any, any, any, any, Record<string, any>>, res: Response):Promise<Response> {
       const { file } = req
-      this.importCategoryUseCase.execute(file as Express.Multer.File)
+      await this.importCategoryUseCase.execute(file as Express.Multer.File)
       return res.send()
     }
 }

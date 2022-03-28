@@ -2,12 +2,14 @@ import { Express } from 'express'
 import fs from 'fs'
 import { parse } from 'csv-parse'
 import { ICategoryRepository } from '../../repositories/ICategoryRepository'
+import { injectable } from 'tsyringe'
 
 type IImportCategory = {
     name: string,
     description: string
 }
 
+@injectable()
 export class ImportCategoryUseCase {
     private categoryRepository: ICategoryRepository;
 
@@ -43,13 +45,13 @@ export class ImportCategoryUseCase {
 
     async execute (file: Express.Multer.File):Promise<void> {
       const categories = await this.loadCategories(file)
-      categories.forEach(category => {
+      categories.forEach(async (category) => {
         const { name, description } = category
 
-        const exists = this.categoryRepository.existsByName(name)
+        const exists = await this.categoryRepository.existsByName(name)
 
         if (!exists) {
-          this.categoryRepository.create({
+          await this.categoryRepository.create({
             name,
             description
           })

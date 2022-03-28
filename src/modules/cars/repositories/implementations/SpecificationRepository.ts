@@ -1,29 +1,30 @@
+import { DataSource, Repository } from 'typeorm'
+import { v4 } from 'uuid'
 import { Specification } from '../../entities/Specification'
 import { ICreateSpecificationDTO, ISpecificationRepository } from '../ISpecificationRepository'
 
 export class SpecificationRepository implements ISpecificationRepository {
-    private specificationList: Specification[];
+    private repository: Repository<Specification>;
 
-    private static INSTACE:ISpecificationRepository;
-
-    private constructor () {
-      this.specificationList = []
+    constructor (dataSource:DataSource) {
+      this.repository = dataSource.getRepository(Specification)
     }
 
-    static getInstance () {
-      if (!this.INSTACE) {
-        this.INSTACE = new SpecificationRepository()
-      }
-      return this.INSTACE
-    }
-
-    findByName (name: string): Specification {
-      const specification = this.specificationList.find(v => v.name === name)
+    async findByName (name: string): Promise<Specification> {
+      const specification = await this.repository.findOne({ where: { name } })
       if (!specification) { throw new Error('specification dos not exist') }
-      return specification as Specification
+      return specification
     }
 
-    create (specification: ICreateSpecificationDTO): void {
-      this.specificationList.push(new Specification({ ...specification, createdAt: new Date().toDateString() }))
+    async create ({ name, description }: ICreateSpecificationDTO): Promise<void> {
+      const specification = this.repository.create(
+        {
+          id: v4(),
+          name,
+          description,
+          createdAt: new Date()
+        })
+
+      await this.repository.save(specification)
     }
 }

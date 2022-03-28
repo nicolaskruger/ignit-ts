@@ -1,25 +1,83 @@
 import { Request, Router } from 'express'
 import multer from 'multer'
+import createCategoryControler from '../modules/cars/useCases/createCategory'
 import { CategoriesRequest } from '../modules/cars/entities/Category'
-import { createCategoryController } from '../modules/cars/useCases/createCategory'
 import { importCategoryController } from '../modules/cars/useCases/importCategory'
-import { listCategoryController } from '../modules/cars/useCases/listCategory'
-export const categoriesRoutes = Router()
+import { listCategoriesController } from '../modules/cars/useCases/listCategory'
+const categoriesRoutes = Router()
 
 const upload = multer({
   dest: './tmp'
 })
 
-categoriesRoutes.post('/', (req: Request<{}, {}, CategoriesRequest>, res) => {
-  return createCategoryController.handle(req, res)
+categoriesRoutes.post('/', async (req: Request<{}, {}, CategoriesRequest>, res) => {
+  /*
+        #swagger.requestBody = {
+              required: true,
+              content: {
+                  "application/json": {
+                      schema: {
+                        "name": "string",
+                        "description": "string"
+                       },
+                  }
+              }
+          }
+  */
+  return await createCategoryControler().handle(req, res)
 })
 
-categoriesRoutes.get('/', (req, res) => {
-  const all = listCategoryController.handle(req, res)
+categoriesRoutes.get('/', async (req, res) => {
+  /*
+    #swagger.responses[200] = {
+        description: "category list",
+        content:{
 
-  return res.json(all)
+          "application/json":{
+            schema:{
+              "type": "array",
+              "items": {
+                  "type": "object",
+                  "properties": {
+                      "id": {
+                          "type": "string"
+                      },
+                      "name": {
+                          "type": "string"
+                      },
+                      "description": {
+                          "type": "string"
+                      },
+                      "createdAt": {
+                          "type": "string"
+                      }
+                  }
+              }
+            }
+        }
+            }
+}
+  */
+  return await listCategoriesController().handle(req, res)
 })
 
-categoriesRoutes.post('/import', upload.single('file'), (req, res) => {
-  return importCategoryController.handle(req, res)
+categoriesRoutes.post('/import', upload.single('file'), async (req, res) => {
+  /*
+        #swagger.requestBody = {
+              required: true,
+              content: {
+                  "multipart/form-data": {
+                      file: {
+                        "type": "string",
+                        "format": "binary"
+                       },
+                  }
+              }
+          }
+  */
+  return await importCategoryController.handle(req, res)
 })
+
+export {
+  categoriesRoutes
+}

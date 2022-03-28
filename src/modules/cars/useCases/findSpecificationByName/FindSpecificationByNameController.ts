@@ -8,11 +8,11 @@ export class FindSpecificationByNameController {
       this.findSpecificationUseCase = findSpecificationUseCase
     }
 
-    handle (req:Request<{name: string}, {}, {}>, res:Response):Response {
+    async handle (req:Request<{name: string}, {}, {}>, res:Response):Promise<Response> {
       const { name } = req.params
 
       try {
-        return res.json(this.findSpecificationUseCase.execute(name))
+        return res.json(await this.findSpecificationUseCase.execute(name))
       } catch (erro) {
         return res.status(400).json({
           msg: `specification with this name doesn't exists name: ${name}`

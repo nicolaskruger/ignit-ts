@@ -1,77 +1,105 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "RentalX Documentation",
-        "descripotion": "This is an API Rent",
-        "version": "1.0.0",
-        "contact": {
-            "email":"nicolas.nkruger@gmail.com"
-        }
-    },
-    "paths": {
-        "/categories": {
-            "post": {
-                "tags": ["Category"],
-                "sumary": "Create a category",
-                "description": "Create a new category",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "propertires": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "name": "category name sample",
-                                    "description": "Create a new category"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created"
-                    },
-                    "500": {
-                        "description": "category already exists"
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "Category"
-                ],
-                "sumary": "List categories",
-                "description": "List all categories",
-                "responses": {
-                    "200": {
-                        "description": "List",
-                        "content": {
-                            "schema":{
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "description": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "rentex",
+    "description": "car things",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/categories/": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {},
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "name": "string",
+                "description": "string"
+              }
             }
+          }
         }
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "category list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {},
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "file": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specification/by_name/{name}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/specification/": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
     }
+  }
 }
