@@ -5,10 +5,10 @@
     "description": "car things",
     "version": "1.0.0"
   },
-  "host": "localhost:3333",
-  "basePath": "/",
-  "schemes": [
-    "http"
+  "servers": [
+    {
+      "url": "http://localhost:3333/"
+    }
   ],
   "paths": {
     "/categories/": {
@@ -21,8 +21,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "name": "string",
-                "description": "string"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
@@ -88,7 +95,9 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {}

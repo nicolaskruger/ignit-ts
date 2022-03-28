@@ -17,8 +17,15 @@ categoriesRoutes.post('/', async (req: Request<{}, {}, CategoriesRequest>, res) 
               content: {
                   "application/json": {
                       schema: {
-                        "name": "string",
-                        "description": "string"
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
                        },
                   }
               }
