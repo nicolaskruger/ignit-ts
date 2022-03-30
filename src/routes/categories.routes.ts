@@ -76,13 +76,22 @@ categoriesRoutes.post('/import', upload.single('file'), async (req, res) => {
         #swagger.requestBody = {
               required: true,
               content: {
-                  "application;octet-stream": {
+                  "multipart/form-data": {
                       "schema": {
-                        "type": "string",
+                        "type": "object",
+                        "properties": {
+                          "file": {
+                            "type": "string",
+                            "format": "binary"
+                          }
+                        }
                        },
                   }
               }
           }
+        #swagger.responses[201] = {
+          description: "Created",
+        }
   */
   return await importCategoryController.handle(req, res)
 })

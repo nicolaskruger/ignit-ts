@@ -76,14 +76,23 @@
       "post": {
         "description": "",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
         "requestBody": {
           "required": true,
           "content": {
             "multipart/form-data": {
-              "file": {
-                "type": "string",
-                "format": "binary"
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               }
             }
           }
