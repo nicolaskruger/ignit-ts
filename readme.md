@@ -43,6 +43,8 @@ sudo docker-compose down
 ```bash
 # create
 npx typeorm migration:create -n <name>
+    or
+npx typeorm migration:create -n <path>
 # run
 npx ts-node ./node_modules/.bin/typeorm migration:run -d <datasource.ts>
 # revert
