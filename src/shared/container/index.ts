@@ -3,6 +3,8 @@ import { DataSource } from 'typeorm'
 import { dataSource } from '../../database'
 import { UserRepository } from '../../modules/accounts/repositories/implementations/UserRepository'
 import { IUserReposisoty } from '../../modules/accounts/repositories/IUserRepository'
+import { CreateUserController } from '../../modules/accounts/useCases/CreateUserController'
+import { CreateUserUseCase } from '../../modules/accounts/useCases/CreateUserUseCase'
 import { ICategoryRepository } from '../../modules/cars/repositories/ICategoryRepository'
 import { CategoriesRepository } from '../../modules/cars/repositories/implementations/CategoryRepositories'
 import { SpecificationRepository } from '../../modules/cars/repositories/implementations/SpecificationRepository'
@@ -69,6 +71,14 @@ const containerConfig = () => {
 
   container.register<CreateSpecificationController>(CreateSpecificationController, {
     useValue: new CreateSpecificationController(container.resolve(CreateSpecificationUseCase))
+  })
+
+  container.register<CreateUserUseCase>(CreateUserUseCase, {
+    useValue: new CreateUserUseCase(container.resolve(UserRepository))
+  })
+
+  container.register<CreateUserController>(CreateUserController, {
+    useValue: new CreateUserController(container.resolve(CreateUserUseCase))
   })
 }
 

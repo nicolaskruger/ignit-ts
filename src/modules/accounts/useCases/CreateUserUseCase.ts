@@ -12,19 +12,30 @@ export class CreateUserUseCase {
     async execute (user:ICreateUserDTO) {
         type FindBy = {
             value: string,
-            func: (value:string) => Promise<User | null>
+            func: (value:string) => Promise<User | null>,
+            message: string
         }
 
         const findBy: FindBy[] = [
           {
             value: user.email,
-            func: this.repository.findByEmail
+            func: (value) => this.repository.findByEmail(value),
+            message: 'jah existe usuario com esse email'
           },
           {
             value: user.userName,
-            func: this.repository.findByUserName
+            func: (value) => this.repository.findByUserName(value),
+            message: 'jah existe usuario con ess user name'
           }
         ]
+
+        await Promise.all(
+          findBy.map(async ({ func, message, value }) => {
+            if (await func(value)) {
+              throw new Error(message)
+            }
+          })
+        )
 
         await this.repository.create(user)
     }
