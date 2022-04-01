@@ -8,11 +8,6 @@ export class User {
     @Column()
     name: string = '';
 
-    @Column({
-      name: 'username'
-    })
-    userName: string = '';
-
     @Column()
     email: string = '';
 
@@ -20,6 +15,9 @@ export class User {
       name: 'driver_license'
     })
     driverLicense: string = '';
+
+    @Column()
+    password: string = ''
 
     @Column()
     isAdmin: boolean = false;

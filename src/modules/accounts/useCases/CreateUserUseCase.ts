@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt'
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
 import { User } from '../entities/User'
 import { IUserReposisoty } from '../repositories/IUserRepository'
@@ -21,11 +22,6 @@ export class CreateUserUseCase {
             value: user.email,
             func: (value) => this.repository.findByEmail(value),
             message: 'jah existe usuario com esse email'
-          },
-          {
-            value: user.userName,
-            func: (value) => this.repository.findByUserName(value),
-            message: 'jah existe usuario con ess user name'
           }
         ]
 
@@ -37,6 +33,8 @@ export class CreateUserUseCase {
           })
         )
 
-        await this.repository.create(user)
+        const passwordHash = await hash(user.password, 8)
+
+        await this.repository.create({ ...user, password: passwordHash })
     }
 }
