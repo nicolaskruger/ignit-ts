@@ -1,6 +1,8 @@
 import { container } from 'tsyringe'
 import { DataSource } from 'typeorm'
 import { dataSource } from '../../database'
+import { UserRepository } from '../../modules/accounts/repositories/implementations/UserRepository'
+import { IUserReposisoty } from '../../modules/accounts/repositories/IUserRepository'
 import { ICategoryRepository } from '../../modules/cars/repositories/ICategoryRepository'
 import { CategoriesRepository } from '../../modules/cars/repositories/implementations/CategoryRepositories'
 import { SpecificationRepository } from '../../modules/cars/repositories/implementations/SpecificationRepository'
@@ -22,6 +24,11 @@ const containerConfig = () => {
   container.register<ICategoryRepository>(
     CategoriesRepository,
     { useValue: new CategoriesRepository(container.resolve(DataSource)) }
+  )
+
+  container.register<IUserReposisoty>(
+    UserRepository,
+    { useValue: new UserRepository(container.resolve(DataSource)) }
   )
 
   container.register<ISpecificationRepository>(
