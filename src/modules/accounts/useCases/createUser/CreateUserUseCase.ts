@@ -1,7 +1,7 @@
 import { hash } from 'bcrypt'
-import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
-import { User } from '../entities/User'
-import { IUserReposisoty } from '../repositories/IUserRepository'
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
+import { User } from '../../entities/User'
+import { IUserReposisoty } from '../../repositories/IUserRepository'
 
 export class CreateUserUseCase {
     private repository: IUserReposisoty;

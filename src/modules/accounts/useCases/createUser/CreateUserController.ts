@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { CreateUserUseCase } from './CreateUserUseCase'
 
 export class CreateUserController {
@@ -13,7 +13,7 @@ export class CreateUserController {
       try {
         await this.createUserUseCase.execute(req.body)
         return res.status(201).json({
-          msg: 'categoria criada con sucesso'
+          msg: 'usuario criado com sucesso'
         })
       } catch (error) {
         const erroType = error as Error
