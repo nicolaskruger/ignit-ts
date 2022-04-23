@@ -28,7 +28,7 @@ export class CreateUserUseCase {
         await Promise.all(
           findBy.map(async ({ func, message, value }) => {
             if (await func(value)) {
-              throw new Error(message)
+              throw new AppError(message)
             }
           })
         )

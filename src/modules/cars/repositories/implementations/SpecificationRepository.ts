@@ -12,7 +12,7 @@ export class SpecificationRepository implements ISpecificationRepository {
 
     async findByName (name: string): Promise<Specification> {
       const specification = await this.repository.findOne({ where: { name } })
-      if (!specification) { throw new Error('specification dos not exist') }
+      if (!specification) { throw new AppError('specification dos not exist') }
       return specification
     }
 

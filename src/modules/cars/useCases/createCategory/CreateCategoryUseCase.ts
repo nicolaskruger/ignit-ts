@@ -1,3 +1,4 @@
+import { AppError } from '../../../../errors/AppError';
 import { ICategoryRepository } from '../../repositories/ICategoryRepository'
 
 type IRequest = {
@@ -16,7 +17,7 @@ class CreateCategoryUseCase {
     const exists = await this.categoriesRepository.existsByName(name)
 
     if (exists) {
-      throw new Error('Category already exists !!!')
+      throw new AppError('Category already exists !!!')
     }
 
     await this.categoriesRepository.create({

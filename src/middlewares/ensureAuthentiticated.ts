@@ -3,6 +3,7 @@ import { container } from "tsyringe"
 import jwt from "jsonwebtoken";
 import { UserRepository } from "../modules/accounts/repositories/implementations/UserRepository";
 import { User } from "../modules/accounts/entities/User";
+import { AppError } from "../errors/AppError";
 
 type IPayLoad = {
     email: string,
@@ -16,7 +17,7 @@ export interface RequestWithUser extends Request {
 export const ensureAuthenticated = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
 
-    if(!authorization) throw new Error("Token missing");
+    if(!authorization) throw new AppError("Token missing", 401);
 
     const token = authorization.replace("Bearer ", "")
 
@@ -38,7 +39,7 @@ export const ensureAuthenticated = async (req: RequestWithUser, res: Response, n
 
         next()
     } catch (error) {
-        throw new Error("Invalid token!")
+        throw new AppError("Invalid token!", 401)
     }
 
 

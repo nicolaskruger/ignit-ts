@@ -10,13 +10,6 @@ export class AuthenticateUserController {
     }
 
     async handle (req: Request<{}, {}, ILoginDTO>, res: Response) {
-      try {
-        return res.status(200).json(await this.useCase.execute(req.body))
-      } catch (error) {
-        const erroType = error as Error
-        return res.status(400).json({
-          msg: erroType.message
-        })
-      }
+      return res.status(200).json(await this.useCase.execute(req.body))
     }
 }

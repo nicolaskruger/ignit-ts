@@ -10,16 +10,9 @@ export class CreateUserController {
     }
 
     async handle (req:Request<{}, {}, ICreateUserDTO>, res: Response) {
-      try {
         await this.createUserUseCase.execute(req.body)
         return res.status(201).json({
           msg: 'usuario criado com sucesso'
         })
-      } catch (error) {
-        const erroType = error as Error
-        return res.status(409).json({
-          msg: erroType.message
-        })
-      }
     }
 }
