@@ -7,6 +7,8 @@ import { AuthenticateUserController } from '../../modules/accounts/useCases/auth
 import { AuthenticateUserUseCase } from '../../modules/accounts/useCases/authenticateUser/AuthenticateUserUseCase'
 import { CreateUserController } from '../../modules/accounts/useCases/createUser/CreateUserController'
 import { CreateUserUseCase } from '../../modules/accounts/useCases/createUser/CreateUserUseCase'
+import { UpdateUserAvatarController } from '../../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController'
+import { UpdateUserAvatarUseCase } from '../../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarUseCase'
 import { ICategoryRepository } from '../../modules/cars/repositories/ICategoryRepository'
 import { CategoriesRepository } from '../../modules/cars/repositories/implementations/CategoryRepositories'
 import { SpecificationRepository } from '../../modules/cars/repositories/implementations/SpecificationRepository'
@@ -89,6 +91,14 @@ const containerConfig = () => {
 
   container.register<AuthenticateUserController>(AuthenticateUserController, {
     useValue: new AuthenticateUserController(container.resolve(AuthenticateUserUseCase))
+  })
+
+  container.register<UpdateUserAvatarUseCase>(UpdateUserAvatarUseCase, {
+    useValue: new UpdateUserAvatarUseCase(container.resolve(UserRepository))
+  })
+
+  container.register<UpdateUserAvatarController>(UpdateUserAvatarController, {
+    useValue: new UpdateUserAvatarController(container.resolve(UpdateUserAvatarUseCase))
   })
 }
 

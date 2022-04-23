@@ -12,11 +12,10 @@ export class CreateCategoryController {
     async handle (req: Request<{}, {}, CategoriesRequest>, res: Response):Promise<Response> {
       const { name, description } = req.body
 
-        const response = await this.createCategoryUseCase.execute({
-          name,
-          description
-        })
-        return res.status(201).json(response)
-      
+      const response = await this.createCategoryUseCase.execute({
+        name,
+        description
+      })
+      return res.status(201).json(response)
     }
 }

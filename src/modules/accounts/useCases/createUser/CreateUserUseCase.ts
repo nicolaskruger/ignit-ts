@@ -1,4 +1,5 @@
 import { hash } from 'bcrypt'
+import { AppError } from '../../../../errors/AppError'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { User } from '../../entities/User'
 import { IUserReposisoty } from '../../repositories/IUserRepository'

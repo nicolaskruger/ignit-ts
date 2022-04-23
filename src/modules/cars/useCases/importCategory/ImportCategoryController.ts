@@ -1,8 +1,6 @@
 import { Request, Response, Express } from 'express'
-import { injectable } from 'tsyringe'
 import { ImportCategoryUseCase } from './ImportCategoryUseCase'
 
-@injectable()
 export class ImportCategoryController {
     private importCategoryUseCase: ImportCategoryUseCase;
 

@@ -12,6 +12,5 @@ export class FindSpecificationByNameController {
       const { name } = req.params
 
       return res.json(await this.findSpecificationUseCase.execute(name))
-     
     }
 }
