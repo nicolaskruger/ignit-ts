@@ -76,7 +76,7 @@ accountRoutes.post('/login', async (req: Request<{}, {}, ILoginDTO>, res: Respon
 
 accountRoutes.use(ensureAuthenticated)
 
-accountRoutes.put('/avatar', upload.single('file'), async (req: Request<any, any, any, any, Record<string, any>>, res: Response) => {
+accountRoutes.patch('/avatar', upload.single('file'), async (req: Request<any, any, any, any, Record<string, any>>, res: Response) => {
   /*
         #swagger.requestBody = {
               required: true,

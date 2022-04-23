@@ -10,7 +10,6 @@ type SpecificationRequest = {
 
 export const specficationRoutes = Router()
 
-
 specficationRoutes.get('/by_name/:name', async (req: Request<{name: string}, {}, {}>, res) => {
   return await findSpecificationController().handle(req, res)
 })
