@@ -9,5 +9,10 @@ export class UpdateUserAvatarUseCase {
       this.repository = repository
     }
 
-    async execute (file: Express.Multer.File, user: User) {}
+    async execute (file: Express.Multer.File, user: User) {
+      await this.repository.changeAvatar(user.id, file.filename)
+      return {
+        msg: 'Alter with sucess'
+      }
+    }
 }

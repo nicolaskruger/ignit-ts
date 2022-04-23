@@ -13,6 +13,6 @@ export class UpdateUserAvatarController {
       const { file, user } = req
       if (!user) throw new AppError('User is undefined', 400)
       if (!file) throw new AppError('File is undefined', 400)
-      return await this.useCase.execute(file as Express.Multer.File, user)
+      return res.status(200).json(await this.useCase.execute(file as Express.Multer.File, user))
     }
 }
