@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express'
 import multer from 'multer'
 import { container } from 'tsyringe'
+import upload from '../config/upload'
 import { ensureAuthenticated } from '../middlewares/ensureAuthentiticated'
 import { ICreateUserDTO } from '../modules/accounts/dtos/ICreateUserDTO'
 import { ILoginDTO } from '../modules/accounts/dtos/ILoginDTO'
@@ -10,9 +11,7 @@ import { UpdateUserAvatarController } from '../modules/accounts/useCases/updateU
 
 const accountRoutes = Router()
 
-const upload = multer({
-  dest: './tmp'
-})
+const uploadAvatar = multer(upload.upload('./tmp/avatar'))
 
 accountRoutes.post('/', async (req: Request<{}, {}, ICreateUserDTO>, res: Response) => {
   /*
@@ -76,7 +75,7 @@ accountRoutes.post('/login', async (req: Request<{}, {}, ILoginDTO>, res: Respon
 
 accountRoutes.use(ensureAuthenticated)
 
-accountRoutes.patch('/avatar', upload.single('file'), async (req: Request<any, any, any, any, Record<string, any>>, res: Response) => {
+accountRoutes.patch('/avatar', uploadAvatar.single('file'), async (req: Request<any, any, any, any, Record<string, any>>, res: Response) => {
   /*
         #swagger.requestBody = {
               required: true,
